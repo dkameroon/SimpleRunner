@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     {
         if (canJump && Input.GetMouseButtonDown(0))
         {
-            rb.AddForce(Vector3.up * (jumpForce + loadedJumpForce), ForceMode.Impulse);
+            rb.AddForce((Vector3.up * (jumpForce + loadedJumpForce))/Time.fixedDeltaTime, ForceMode.Acceleration);
         }
     }
 
