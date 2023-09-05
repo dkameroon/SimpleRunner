@@ -86,10 +86,8 @@ public class GameManager : MonoBehaviour
         {
             float waitTime = Random.Range(5f, 10f);
             yield return new WaitForSeconds(waitTime);
-
-            Quaternion rotation = Quaternion.Euler(0, 0, 90);
             
-            Instantiate(coinPrefab, coinSpawnPoint.position, rotation);
+            Instantiate(coinPrefab, coinSpawnPoint.position, Quaternion.identity);
         }
     }
     

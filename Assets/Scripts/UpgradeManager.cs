@@ -16,6 +16,7 @@ public class UpgradeManager : MonoBehaviour
 
     private void Start()
     {
+        coins = PlayerPrefs.GetInt("CollectedCoins");
         currentCost = playerUpgradeData.cost;
         UpdateVisual();
     }
