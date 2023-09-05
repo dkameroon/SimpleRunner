@@ -1,0 +1,174 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using Random = UnityEngine.Random;
+
+public class GameManager : MonoBehaviour
+{
+    public static GameManager Instance { get;private set; }
+    [SerializeField] private float score;
+    [SerializeField] private GameObject GameOverUI;
+    [SerializeField] private Transform spawnPoint;
+    [SerializeField] private GameObject coinPrefab;
+    [SerializeField] private Transform coinSpawnPoint;
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI coinsText;
+    [SerializeField] private float scoreMultiplier;
+    private int currentCoins = 0;
+    public bool shouldCount = true;
+    public static bool GameOver;
+    [SerializeField] private List<GameObject> obstaclesPrefabs;
+    
+
+    public bool IsNewHighScore;
+
+    private List<GameObject> obstacles = new List<GameObject>();
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    private void Start()
+    {
+        IsNewHighScore = false;
+        GameOver = false;
+        Time.timeScale = 1f;
+        StartGameCoroutine();
+        StartCoroutine(RemoveObstacles());
+        StartCoroutine(SpawnCoins());
+        currentCoins = PlayerPrefs.GetInt("CollectedCoins", 0);
+        coinsText.text = currentCoins.ToString();
+    }
+
+    private void Update()
+    {
+        ScoreRewarding();
+        GameOverTrue();
+        HighScoreSaving();
+    }
+
+    private void ScoreRewarding()
+    {
+        if (shouldCount)
+        {
+            score += Time.deltaTime * scoreMultiplier;
+            UpdateVisualScore();
+        }
+    }
+    private void GameOverTrue()
+    {
+        if (GameOver == true)
+        {
+            Time.timeScale = 0f;
+            GameOverUI.SetActive(true);
+        }
+    }
+
+    private IEnumerator SpawnObstaclesAndCoins()
+    {
+        while (true)
+        {
+            float waitTime = Random.Range(1f, 2f);
+            yield return new WaitForSeconds(waitTime);
+            int randomIndex = Random.Range(0, obstaclesPrefabs.Count);
+            GameObject selectedPrefab = obstaclesPrefabs[randomIndex];
+            GameObject newObstacle = Instantiate(selectedPrefab, spawnPoint.position, Quaternion.identity);
+            obstacles.Add(newObstacle);
+        }
+    }
+
+    private IEnumerator SpawnCoins()
+    {
+        while (true)
+        {
+            float waitTime = Random.Range(5f, 10f);
+            yield return new WaitForSeconds(waitTime);
+
+            Quaternion rotation = Quaternion.Euler(0, 0, 90);
+            
+            Instantiate(coinPrefab, coinSpawnPoint.position, rotation);
+        }
+    }
+    
+
+    private void HighScoreSaving()
+    {
+        if (score > PlayerPrefs.GetFloat("HighScore",0f))
+        {
+            PlayerPrefs.SetFloat("HighScore", score);
+            PlayerPrefs.Save();
+            IsNewHighScore = true;
+        }
+    }
+
+    private void UpdateVisualScore()
+    {
+        if (!shouldCount) return;
+        scoreText.text = "Score : " + Mathf.FloorToInt(score).ToString();
+        
+    }
+
+    private void StartGameCoroutine()
+    {
+        StartCoroutine(nameof(SpawnObstaclesAndCoins));
+    }
+
+    public void StartGame()
+    {
+        shouldCount = true;
+        StartGameCoroutine();
+        SpawnCoins();
+    }
+
+    
+    private IEnumerator RemoveObstacles()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1.0f); // Adjust the frequency as needed.
+
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+            if (player != null)
+            {
+                Vector3 playerPosition = player.transform.position;
+
+                for (int i = obstacles.Count - 1; i >= 0; i--)
+                {
+                    GameObject obstacle = obstacles[i];
+
+                    if (obstacle != null)
+                    {
+                        Vector3 obstaclePosition = obstacle.transform.position;
+
+                        // Check if the obstacle is behind the player (in the negative Z direction).
+                        if (obstaclePosition.z + 3.5f < playerPosition.z)
+                        {
+                            obstacles.RemoveAt(i);
+                            Destroy(obstacle);
+                        }
+                    }
+                    else
+                    {
+                        obstacles.RemoveAt(i);
+                    }
+                }
+            }
+        }
+    }
+
+    public void IncreaseCoins(int v)
+    {
+        currentCoins += v;
+        coinsText.text = currentCoins.ToString();
+    }
+    
+    public int GetTotalCoins()
+    {
+        return currentCoins;
+    }
+    
+}
