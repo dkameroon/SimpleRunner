@@ -2693,7 +2693,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 15
-  loadedJumpForce: 0
+  currentLevel: 0
+  playerUpgradeData: {fileID: 11400000, guid: c353289da26607c45a9555b1fdf5f712, type: 2}
 --- !u!1 &1934909748
 GameObject:
   m_ObjectHideFlags: 0

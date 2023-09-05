@@ -8,7 +8,8 @@ public class Player : MonoBehaviour
     public static Player Instance { get;private set; }
     private Rigidbody rb;
     [SerializeField] private int jumpForce;
-    [SerializeField] private int loadedJumpForce;
+    [SerializeField] private int currentLevel;
+    [SerializeField] private PlayerUpgradeData playerUpgradeData;
     private bool canJump;
 
     private void Awake()
@@ -19,14 +20,14 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        loadedJumpForce = PlayerPrefs.GetInt("JumpForce", 0);
+        currentLevel = PlayerPrefs.GetInt("CurrentLevel");
     }
 
     private void Update()
     {
         if (canJump && Input.GetMouseButtonDown(0))
         {
-            rb.AddForce((Vector3.up * (jumpForce + loadedJumpForce))/Time.fixedDeltaTime, ForceMode.Acceleration);
+            rb.AddForce((Vector3.up * (jumpForce * playerUpgradeData.JumpForceByLevel[currentLevel].Value))/Time.fixedDeltaTime, ForceMode.Acceleration);
         }
     }
 

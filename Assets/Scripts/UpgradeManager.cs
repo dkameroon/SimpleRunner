@@ -10,21 +10,21 @@ public class UpgradeManager : MonoBehaviour
     private int coins;
     private int currentCoins;
     private int currentCost;
-    private int jumpForce = 1;
-    private int finalJumpForce;
+    private int currentLevel = 1;
     private bool IsMaximumLevel = false;
 
     private void Start()
     {
+        currentLevel = PlayerPrefs.GetInt("CurrentLevel");
         coins = PlayerPrefs.GetInt("CollectedCoins");
-        currentCost = playerUpgradeData.cost;
+        currentCost = playerUpgradeData.JumpForceByLevel[currentLevel].Cost;
         UpdateVisual();
     }
     
     private void UpdateVisual()
     {
         upgradeSystemUI.UpdateCoinsText(coins);
-        upgradeSystemUI.UpdateLevelText(IsMaximumLevel, jumpForce);
+        upgradeSystemUI.UpdateLevelText(IsMaximumLevel, currentLevel);
         upgradeSystemUI.UpdateCostText(IsMaximumLevel, currentCost);
     }
 
@@ -35,7 +35,7 @@ public class UpgradeManager : MonoBehaviour
             coins -= currentCost;
             PlayerPrefs.SetInt("CurrentCostJumpForce", currentCost);
             PlayerPrefs.SetInt("CollectedCoins", coins);
-            PlayerPrefs.SetInt("JumpForce", jumpForce);
+            PlayerPrefs.SetInt("CurrentLevel", currentLevel);
             PlayerPrefs.Save();
         }
         else
@@ -46,13 +46,13 @@ public class UpgradeManager : MonoBehaviour
 
     public void TryToUpgrade()
     {
-        if (jumpForce < 3 && !IsMaximumLevel)
+        if (currentLevel < 5 && !IsMaximumLevel)
         {
             if (coins >= currentCost)
             {
                 UpdatingJumpForce();
-                currentCost += 20;
-                jumpForce++;
+                currentLevel++;
+                currentCost = playerUpgradeData.JumpForceByLevel[currentLevel].Cost;
                 upgradeSystemUI.UpdateErrorMessage("");
             }
             else
@@ -68,7 +68,7 @@ public class UpgradeManager : MonoBehaviour
             }
             IsMaximumLevel = true;
             upgradeSystemUI.UpdateCostText(IsMaximumLevel, currentCost);
-            upgradeSystemUI.UpdateLevelText(IsMaximumLevel, jumpForce);
+            upgradeSystemUI.UpdateLevelText(IsMaximumLevel, currentLevel);
             upgradeSystemUI.UpdateErrorMessage("");
         }
         UpdateVisual();
@@ -77,14 +77,11 @@ public class UpgradeManager : MonoBehaviour
     public void ResetUpgradeSystem()
     {
         // Reset relevant variables and PlayerPrefs here
-        coins = 300;
-        currentCost = 20;
+        coins = 1800;
         IsMaximumLevel = false;
-        jumpForce = 1;
-
-        PlayerPrefs.SetInt("JumpForce", 0);
-        PlayerPrefs.SetInt("CollectedCoins", 300);
-        PlayerPrefs.SetInt("CurrentCostJumpForce", 20);
+        currentLevel = 1;
+        PlayerPrefs.SetInt("CurrentLevel", 0);
+        PlayerPrefs.SetInt("CollectedCoins", coins);
         PlayerPrefs.Save();
 
         UpdateVisual();

@@ -944,7 +944,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54033ca4d7a227b4bae675ef0f7874a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerUpgradeData: {fileID: 11400000, guid: 999abcf873b74134c8af84d7544a9f7a, type: 2}
+  playerUpgradeData: {fileID: 11400000, guid: c353289da26607c45a9555b1fdf5f712, type: 2}
   upgradeSystemUI: {fileID: 900440179}
 --- !u!1 &429023728
 GameObject:
@@ -1354,7 +1354,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1373957343}
   m_Father: {fileID: 900440178}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1644,7 +1645,6 @@ RectTransform:
   - {fileID: 889171399}
   - {fileID: 178426696}
   - {fileID: 740062129}
-  - {fileID: 1373957343}
   - {fileID: 467595128}
   - {fileID: 1645393429}
   m_Father: {fileID: 1296716184}
@@ -2212,12 +2212,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 900440178}
+  m_Father: {fileID: 740062129}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 122, y: 1429.0002}
+  m_AnchoredPosition: {x: 425, y: -0.00036621094}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1373957344
@@ -2299,7 +2299,7 @@ MonoBehaviour:
   m_verticalMapping: 0
   m_uvLineOffset: 0
   m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
+  m_IsTextObjectScaleStatic: 1
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
