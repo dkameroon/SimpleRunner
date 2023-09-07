@@ -25,12 +25,20 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (canJump && Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            rb.AddForce((Vector3.up * (jumpForce * playerUpgradeData.JumpForceByLevel[currentLevel].Value))/Time.fixedDeltaTime, ForceMode.Acceleration);
+           Jump();
         }
     }
 
+    private void Jump()
+    {
+        if (!canJump)
+            return;
+        
+        rb.AddForce((Vector3.up * (jumpForce * playerUpgradeData.JumpForceByLevel[currentLevel].Value))/Time.fixedDeltaTime, ForceMode.Acceleration);
+        SoundManager.Instance.PlayJumpSound(Camera.main.transform.position,1f);
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
