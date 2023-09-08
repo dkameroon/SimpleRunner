@@ -2,13 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour
 {
     public static Player Instance { get;private set; }
     private Rigidbody rb;
     [SerializeField] private int jumpForce;
-    [SerializeField] private int currentLevel;
+    [SerializeField] private int currentLevelJumpForce;
     [SerializeField] private PlayerUpgradeData playerUpgradeData;
     private bool canJump;
 
@@ -20,7 +21,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        currentLevel = PlayerPrefs.GetInt("CurrentLevel");
+        currentLevelJumpForce = PlayerPrefs.GetInt(PlayerPrefsNames.CURRENT_LEVEL_JUMP_FORCE);
     }
 
     private void Update()
@@ -37,7 +38,7 @@ public class Player : MonoBehaviour
         if (!canJump)
             return;
         
-        rb.AddForce((Vector3.up * (jumpForce * playerUpgradeData.JumpForceByLevel[currentLevel].Value))/Time.fixedDeltaTime, ForceMode.Acceleration);
+        rb.AddForce((Vector3.up * (jumpForce * playerUpgradeData.JumpForceByLevel[currentLevelJumpForce].Value))/Time.fixedDeltaTime, ForceMode.Acceleration);
         SoundManager.Instance.PlayJumpSound(Camera.main.transform.position,1f);
     }
     private void OnCollisionEnter(Collision collision)

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Common;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class UpgradeSystemUI : MonoBehaviour
@@ -11,9 +12,12 @@ public class UpgradeSystemUI : MonoBehaviour
     [SerializeField] private Button quitButton;
     [SerializeField] private TextMeshProUGUI coinsText;
     [SerializeField] private Button jumpForceUpgradeButton;
+    [SerializeField] private Button scoreMultipierUpgradeButton;
     [SerializeField] private Button resetButton;
-    [SerializeField] private TextMeshProUGUI levelOfUpgradeText;
-    [SerializeField] private TextMeshProUGUI costOfUpgradeText;
+    [SerializeField] private TextMeshProUGUI levelOfUpgradeJumpForceText;
+    [SerializeField] private TextMeshProUGUI costOfUpgradeJumpForceText;
+    [SerializeField] private TextMeshProUGUI levelOfUpgradeScoreMultiplierText;
+    [SerializeField] private TextMeshProUGUI costOfUpgradeScoreMultiplierText;
     [SerializeField] private PlayerUpgradeData playerUpgradeData;
     [SerializeField] private TextMeshProUGUI errorMessageText;
     
@@ -29,11 +33,18 @@ public class UpgradeSystemUI : MonoBehaviour
         {
             upgradeManager.TryToUpgrade();
         });
+        scoreMultipierUpgradeButton.onClick.AddListener(() =>
+        {
+            upgradeManager.TryToUpgradeScoreMultiplier();
+        });
+        
         resetButton.onClick.AddListener(() =>
         {
             upgradeManager.ResetUpgradeSystem();
-            costOfUpgradeText.text = "Cost : 20";
-            levelOfUpgradeText.text = "Level : 1";
+            costOfUpgradeJumpForceText.text = "Cost : 20";
+            levelOfUpgradeJumpForceText.text = "Level : 1";
+            costOfUpgradeScoreMultiplierText.text = "Cost : 60";
+            levelOfUpgradeScoreMultiplierText.text = "Level : 1";
         });
     }
 
@@ -47,14 +58,24 @@ public class UpgradeSystemUI : MonoBehaviour
         coinsText.text = coins.ToString();
     }
 
-    public void UpdateLevelText(bool isMaximumLevel, int jumpForce)
+    public void UpdateLevelJumpForceText(bool isMaximumLevel, int jumpForce)
     {
-        levelOfUpgradeText.text = isMaximumLevel ? "Level: Max" : "Level: " + jumpForce;
+        levelOfUpgradeJumpForceText.text = isMaximumLevel ? "Level: Max" : "Level: " + jumpForce;
     }
 
-    public void UpdateCostText(bool isMaximumLevel, int currentCost)
+    public void UpdateCostJumpForceText(bool isMaximumLevel, int currentCost)
     {
-        costOfUpgradeText.text = isMaximumLevel ? "" : "Cost: " + currentCost;
+        costOfUpgradeJumpForceText.text = isMaximumLevel ? "" : "Cost: " + currentCost;
+    }
+    
+    public void UpdateLevelScoreMultiplierText(bool isMaximumLevel, int jumpForce)
+    {
+        levelOfUpgradeScoreMultiplierText.text = isMaximumLevel ? "Level: Max" : "Level: " + jumpForce;
+    }
+
+    public void UpdateCostScoreMultiplierText(bool isMaximumLevel, int currentCost)
+    {
+        costOfUpgradeScoreMultiplierText.text = isMaximumLevel ? "" : "Cost: " + currentCost;
     }
 
     public void UpdateErrorMessage(string message)

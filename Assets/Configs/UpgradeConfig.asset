@@ -25,3 +25,14 @@ MonoBehaviour:
     Cost: 160
   - Value: 1.25
     Cost: 320
+  ScoreMultiplierByLevel:
+  - Value: 1
+    Cost: 0
+  - Value: 2
+    Cost: 60
+  - Value: 3
+    Cost: 120
+  - Value: 4
+    Cost: 240
+  - Value: 5
+    Cost: 480

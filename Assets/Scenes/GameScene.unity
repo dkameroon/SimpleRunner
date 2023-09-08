@@ -9736,7 +9736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38258400bb6f4264c8f5e8d95c93d85a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpSound: {fileID: 8300000, guid: 333e49c2e7d554443b5e5f423e3c0610, type: 3}
+  audioClipRefsSO: {fileID: 11400000, guid: 1f87e6405224bd94d9421cc7578441e5, type: 2}
   volumeSounds: 0
 --- !u!4 &1643935267
 Transform:
@@ -10323,6 +10323,7 @@ MonoBehaviour:
   coinsText: {fileID: 309127062}
   scoreMultiplier: 1
   pauseButton: {fileID: 1766539783}
+  playerUpgradeData: {fileID: 11400000, guid: c353289da26607c45a9555b1fdf5f712, type: 2}
   shouldCount: 1
   obstaclesPrefabs:
   - {fileID: 6797021948788294303, guid: 8d124e9b237759b4babbe045f234ec9e, type: 3}
@@ -10590,7 +10591,6 @@ GameObject:
   - component: {fileID: 1848614899}
   - component: {fileID: 1848614898}
   - component: {fileID: 1848614903}
-  - component: {fileID: 1848614904}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -10725,20 +10725,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 15
-  currentLevel: 0
+  currentLevelJumpForce: 0
   playerUpgradeData: {fileID: 11400000, guid: c353289da26607c45a9555b1fdf5f712, type: 2}
---- !u!114 &1848614904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1848614897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cc8f6003df255448885a6621cb2cb1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1892502954
 GameObject:
   m_ObjectHideFlags: 0

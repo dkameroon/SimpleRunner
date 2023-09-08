@@ -28,7 +28,7 @@ public class Coin : MonoBehaviour
             Destroy(gameObject);
             value++;
             GameManager.Instance.IncreaseCoins(value);
-            PlayerPrefs.SetInt("CollectedCoins", GameManager.Instance.GetTotalCoins());
+            PlayerPrefs.SetInt(PlayerPrefsNames.COLLECTED_COINS, GameManager.Instance.GetTotalCoins());
             PlayerPrefs.Save();
         }
     }

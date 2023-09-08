@@ -20,13 +20,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform coinSpawnPoint;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI coinsText;
-    [SerializeField] private float scoreMultiplier;
+    
     [SerializeField] private Button pauseButton;
+    [SerializeField] private PlayerUpgradeData playerUpgradeData;
     private int currentCoins = 0;
     public bool shouldCount = true;
     public static bool GameOver;
     private bool isGamePaused = false;
     [SerializeField] private List<GameObject> obstaclesPrefabs;
+    private int scoreMultiplierLevel;
     
 
     public bool IsNewHighScore;
@@ -50,12 +52,14 @@ public class GameManager : MonoBehaviour
         StartGameCoroutine();
         StartCoroutine(RemoveObstacles());
         StartCoroutine(SpawnCoins());
-        currentCoins = PlayerPrefs.GetInt("CollectedCoins", 0);
+        currentCoins = PlayerPrefs.GetInt(PlayerPrefsNames.COLLECTED_COINS, 0);
+        scoreMultiplierLevel = PlayerPrefs.GetInt(PlayerPrefsNames.CURRENT_LEVEL_SCORE_MULTIPLIER);
         coinsText.text = currentCoins.ToString();
     }
 
     private void Update()
     {
+        Debug.Log(scoreMultiplierLevel);
         ScoreRewarding();
         GameOverTrue();
         HighScoreSaving();
@@ -65,7 +69,7 @@ public class GameManager : MonoBehaviour
     {
         if (shouldCount)
         {
-            score += Time.deltaTime * scoreMultiplier;
+            score += Time.deltaTime * playerUpgradeData.ScoreMultiplierByLevel[scoreMultiplierLevel].Value;
             UpdateVisualScore();
         }
     }
@@ -105,9 +109,9 @@ public class GameManager : MonoBehaviour
 
     private void HighScoreSaving()
     {
-        if (score > PlayerPrefs.GetFloat("HighScore",0f))
+        if (score > PlayerPrefs.GetFloat(PlayerPrefsNames.HIGH_SCORE,0f))
         {
-            PlayerPrefs.SetFloat("HighScore", score);
+            PlayerPrefs.SetFloat(PlayerPrefsNames.HIGH_SCORE, score);
             PlayerPrefs.Save();
             IsNewHighScore = true;
         }
