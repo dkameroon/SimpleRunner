@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
         {
            Jump();
         }
+        
     }
 
     private void Jump()
@@ -44,7 +45,6 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             canJump = true;
-            Debug.Log("Player is grounded");
         }
     }
 
@@ -53,7 +53,6 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             canJump = false;
-            Debug.Log("Player is not grounded");
         }
     }
     
