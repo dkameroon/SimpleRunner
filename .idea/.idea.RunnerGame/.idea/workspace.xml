@@ -11,6 +11,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/MusicManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../SmashApocalypse/Assets/_Scripts/UpgradesConfig.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
@@ -91,7 +92,8 @@
       <workItem from="1693947783478" duration="77000" />
       <workItem from="1693947871927" duration="1391000" />
       <workItem from="1693949695329" duration="1122000" />
-      <workItem from="1694117414046" duration="910000" />
+      <workItem from="1694117414046" duration="1561000" />
+      <workItem from="1694163418866" duration="4400000" />
     </task>
     <servers />
   </component>

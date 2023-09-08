@@ -3,11 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get;private set; }
+    
+    public event EventHandler OnGamePaused;
+    public event EventHandler OnGameUnPaused;
+    
     [SerializeField] private float score;
     [SerializeField] private GameObject GameOverUI;
     [SerializeField] private Transform spawnPoint;
@@ -16,9 +21,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI coinsText;
     [SerializeField] private float scoreMultiplier;
+    [SerializeField] private Button pauseButton;
     private int currentCoins = 0;
     public bool shouldCount = true;
     public static bool GameOver;
+    private bool isGamePaused = false;
     [SerializeField] private List<GameObject> obstaclesPrefabs;
     
 
@@ -29,6 +36,10 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        pauseButton.onClick.AddListener(() =>
+        {
+            TogglePauseGame();
+        });
     }
 
     private void Start()
@@ -167,6 +178,21 @@ public class GameManager : MonoBehaviour
     public int GetTotalCoins()
     {
         return currentCoins;
+    }
+    
+    public void TogglePauseGame()
+    {
+        isGamePaused = !isGamePaused;
+        if (isGamePaused)
+        {
+            Time.timeScale = 0f;
+            OnGamePaused?.Invoke(this,EventArgs.Empty);
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            OnGameUnPaused?.Invoke(this, EventArgs.Empty);
+        }
     }
     
 }

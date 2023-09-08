@@ -12,7 +12,6 @@ public class GameOverUI : MonoBehaviour
     [SerializeField] private GameObject congratulationText;
     [SerializeField] private Button restartButton;
     [SerializeField] private Button menuButton;
-    [SerializeField] private Button resetButton;
     [SerializeField] private GameManager gameManager;
     
 
@@ -25,10 +24,6 @@ public class GameOverUI : MonoBehaviour
         menuButton.onClick.AddListener(() => {
             SceneManager.LoadScene("MainMenuScene");
         });
-        resetButton.onClick.AddListener(() => {
-            ResetHighScore();
-        });
-        
     }
 
     private void Start()
@@ -55,11 +50,6 @@ public class GameOverUI : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-
-    private void ResetHighScore()
-    {
-        PlayerPrefs.SetFloat("HighScore", 0f);
-        PlayerPrefs.Save();
-    }
+    
     
 }

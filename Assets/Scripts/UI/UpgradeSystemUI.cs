@@ -32,6 +32,8 @@ public class UpgradeSystemUI : MonoBehaviour
         resetButton.onClick.AddListener(() =>
         {
             upgradeManager.ResetUpgradeSystem();
+            costOfUpgradeText.text = "Cost : 20";
+            levelOfUpgradeText.text = "Level : 1";
         });
     }
 
