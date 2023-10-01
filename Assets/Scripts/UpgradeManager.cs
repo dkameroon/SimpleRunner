@@ -53,7 +53,6 @@ public class UpgradeManager : MonoBehaviour
 
     private void UpdatingScoreMultiplier()
     {
-        Debug.Log("0");
         if (coins >= currentCostScoreMultiplier && !IsMaximumLevelScoreMultiplier)
         {
             coins -= currentCostScoreMultiplier;
@@ -100,7 +99,6 @@ public class UpgradeManager : MonoBehaviour
     
     public void TryToUpgradeScoreMultiplier()
     {
-        Debug.Log("1");
         if (currentLevelScoreMultiplier < 4 && !IsMaximumLevelScoreMultiplier)
         {
             if (coins >= currentCostJumpForce)

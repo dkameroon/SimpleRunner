@@ -8,7 +8,9 @@ public class MainMenuUI : MonoBehaviour
 {
     [SerializeField] private Button playButton;
     [SerializeField] private Button upgradeButton;
+    [SerializeField] private Button recordsButton;
     [SerializeField] private GameObject upgradeSystem;
+    [SerializeField] private GameObject highscoresTables;
    
    
     public static MainMenuUI Instance { get;private set; }
@@ -22,6 +24,10 @@ public class MainMenuUI : MonoBehaviour
            upgradeButton.onClick.AddListener(() =>
            {
                upgradeSystem.gameObject.SetActive(true);
+           });
+           recordsButton.onClick.AddListener(() =>
+           {
+               highscoresTables.gameObject.SetActive(true);
            });
    
            Time.timeScale = 1f;

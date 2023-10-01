@@ -52,14 +52,13 @@ public class GameManager : MonoBehaviour
         StartGameCoroutine();
         StartCoroutine(RemoveObstacles());
         StartCoroutine(SpawnCoins());
-        currentCoins = PlayerPrefs.GetInt(PlayerPrefsNames.COLLECTED_COINS, 0);
+        currentCoins = PlayerPrefs.GetInt(PlayerPrefsNames.COLLECTED_COINS);
         scoreMultiplierLevel = PlayerPrefs.GetInt(PlayerPrefsNames.CURRENT_LEVEL_SCORE_MULTIPLIER);
         coinsText.text = currentCoins.ToString();
     }
 
     private void Update()
     {
-        Debug.Log(scoreMultiplierLevel);
         ScoreRewarding();
         GameOverTrue();
         HighScoreSaving();

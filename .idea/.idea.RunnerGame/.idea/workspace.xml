@@ -11,6 +11,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/HighscoreTable/HighscoreTable.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AudioClipRefsSO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/MusicManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerPrefsNames.cs" root0="FORCE_HIGHLIGHTING" />
@@ -97,7 +98,8 @@
       <workItem from="1694117414046" duration="1561000" />
       <workItem from="1694163418866" duration="5193000" />
       <workItem from="1694194095302" duration="4661000" />
-      <workItem from="1694200640350" duration="4040000" />
+      <workItem from="1694200640350" duration="5908000" />
+      <workItem from="1696123906571" duration="5893000" />
     </task>
     <servers />
   </component>
