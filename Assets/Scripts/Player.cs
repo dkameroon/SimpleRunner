@@ -30,7 +30,6 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
            Jump();
-
         }
         
     }

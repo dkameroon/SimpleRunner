@@ -14,5 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jump:
   - {fileID: 8300000, guid: 333e49c2e7d554443b5e5f423e3c0610, type: 3}
-  defeat: []
-  landing: []
+  defeat:
+  - {fileID: 8300000, guid: 2af4325fdb5569943b2fc30f56ac1852, type: 3}
+  pickUpCoin:
+  - {fileID: 8300000, guid: fb38ad86e900dbb45b9ee2842ff6e13c, type: 3}
+  upgrade:
+  - {fileID: 8300000, guid: 97aa3d904ad73e04faab3979564200d2, type: 3}

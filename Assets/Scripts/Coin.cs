@@ -26,6 +26,7 @@ public class Coin : MonoBehaviour
         if(other.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
+            SoundManager.Instance.PlayPickUpSound(Camera.main.transform.position,1f);
             value++;
             GameManager.Instance.IncreaseCoins(value);
             PlayerPrefs.SetInt(PlayerPrefsNames.COLLECTED_COINS, GameManager.Instance.GetTotalCoins());

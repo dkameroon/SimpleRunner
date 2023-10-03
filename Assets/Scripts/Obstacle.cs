@@ -30,6 +30,7 @@ public class Obstacle : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             GameManager.GameOver = true;
+            SoundManager.Instance.PlayDefeatSound(Camera.main.transform.position,1f);
         }
     }
 

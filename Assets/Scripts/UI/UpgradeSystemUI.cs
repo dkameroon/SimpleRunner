@@ -32,10 +32,12 @@ public class UpgradeSystemUI : MonoBehaviour
         jumpForceUpgradeButton.onClick.AddListener(() =>
         {
             upgradeManager.TryToUpgrade();
+            SoundManager.Instance.PlayLevelUpSound(Camera.main.transform.position,1f);
         });
         scoreMultipierUpgradeButton.onClick.AddListener(() =>
         {
             upgradeManager.TryToUpgradeScoreMultiplier();
+            SoundManager.Instance.PlayLevelUpSound(Camera.main.transform.position,1f);
         });
         
         resetButton.onClick.AddListener(() =>

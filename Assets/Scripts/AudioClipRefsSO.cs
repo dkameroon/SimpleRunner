@@ -6,5 +6,6 @@ public class AudioClipRefsSO : ScriptableObject
 {
     public AudioClip[] jump;
     public AudioClip[] defeat;
-    public AudioClip[] landing;
+    public AudioClip[] pickUpCoin;
+    public AudioClip[] upgrade;
 }

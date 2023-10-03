@@ -26,5 +26,20 @@ public class SoundManager : MonoBehaviour
     {
         PlaySound(audioClipRefsSO.jump,position, volume);
     }
+    
+    public void PlayPickUpSound(Vector3 position,float volume)
+    {
+        PlaySound(audioClipRefsSO.pickUpCoin,position, volume);
+    }
+    
+    public void PlayDefeatSound(Vector3 position,float volume)
+    {
+        PlaySound(audioClipRefsSO.defeat,position, volume);
+    }
+    
+    public void PlayLevelUpSound(Vector3 position,float volume)
+    {
+        PlaySound(audioClipRefsSO.upgrade,position, volume);
+    }
 
 }
