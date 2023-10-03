@@ -28,8 +28,10 @@ public class GameManager : MonoBehaviour
     public static bool GameOver;
     private bool isGamePaused = false;
     [SerializeField] private List<GameObject> obstaclesPrefabs;
-    [SerializeField] private Transform wallGraffitiSpawnPoint;
-    [SerializeField] private Transform groundGraffitiSpawnPoint;
+    [SerializeField] private List<Transform> wallGraffitiSpawnPoints;
+    [SerializeField] private List<Transform> groundGraffitiSpawnPoints;
+    /*[SerializeField] private Transform wallGraffitiSpawnPoint;
+    [SerializeField] private Transform groundGraffitiSpawnPoint;*/
     [SerializeField] private List<GameObject> graffitiList;
     private int scoreMultiplierLevel;
     
@@ -86,7 +88,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private IEnumerator SpawnObstaclesAndCoins()
+    private IEnumerator SpawnObstacles()
     {
         while (true)
         {
@@ -107,9 +109,11 @@ public class GameManager : MonoBehaviour
             float waitTime = Random.Range(4f, 6f);
             yield return new WaitForSeconds(waitTime);
             int randomIndex = Random.Range(0, graffitiList.Count);
+            int randomIndexWallSpawnPoint = Random.Range(0, wallGraffitiSpawnPoints.Count);
+            Transform spawnPointWall = wallGraffitiSpawnPoints[randomIndexWallSpawnPoint];
             GameObject selectedPrefab = graffitiList[randomIndex];
             Quaternion spawnRotation = Quaternion.Euler(0f, -90f, 0f);
-            GameObject newWallGraffiti = Instantiate(selectedPrefab, wallGraffitiSpawnPoint.position, spawnRotation);
+            GameObject newWallGraffiti = Instantiate(selectedPrefab, spawnPointWall.position, spawnRotation);
             obstacles.Add(newWallGraffiti);
         }
     }
@@ -121,9 +125,11 @@ public class GameManager : MonoBehaviour
             float waitTime = Random.Range(10f, 17f);
             yield return new WaitForSeconds(waitTime);
             int randomIndex = Random.Range(0, graffitiList.Count);
+            int randomIndexGroundSpawnPoint = Random.Range(0, groundGraffitiSpawnPoints.Count);
+            Transform spawnPointGround = groundGraffitiSpawnPoints[randomIndexGroundSpawnPoint];
             GameObject selectedPrefab = graffitiList[randomIndex];
             Quaternion spawnRotation = Quaternion.Euler(0f, -90f, 0f);
-            GameObject newGroundGraffiti = Instantiate(selectedPrefab, groundGraffitiSpawnPoint.position, spawnRotation);
+            GameObject newGroundGraffiti = Instantiate(selectedPrefab, spawnPointGround.position, spawnRotation);
             obstacles.Add(newGroundGraffiti);
         }
     }
@@ -159,7 +165,7 @@ public class GameManager : MonoBehaviour
 
     private void StartGameCoroutine()
     {
-        StartCoroutine(nameof(SpawnObstaclesAndCoins));
+        StartCoroutine(nameof(SpawnObstacles));
     }
 
     public void StartGame()

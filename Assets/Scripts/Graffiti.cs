@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class Graffiti : MonoBehaviour
 {
     public static Graffiti Instance { get; private set; }
-    private float speed = 5f;
+    private float speed = 3f;
 
     private void Awake()
     {
