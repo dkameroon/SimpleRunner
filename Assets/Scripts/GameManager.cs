@@ -28,6 +28,9 @@ public class GameManager : MonoBehaviour
     public static bool GameOver;
     private bool isGamePaused = false;
     [SerializeField] private List<GameObject> obstaclesPrefabs;
+    [SerializeField] private Transform wallGraffitiSpawnPoint;
+    [SerializeField] private Transform groundGraffitiSpawnPoint;
+    [SerializeField] private List<GameObject> graffitiList;
     private int scoreMultiplierLevel;
     
 
@@ -52,6 +55,8 @@ public class GameManager : MonoBehaviour
         StartGameCoroutine();
         StartCoroutine(RemoveObstacles());
         StartCoroutine(SpawnCoins());
+        StartCoroutine(SpawnGroundGraffiti());
+        StartCoroutine(SpawnWallGraffiti());
         currentCoins = PlayerPrefs.GetInt(PlayerPrefsNames.COLLECTED_COINS);
         scoreMultiplierLevel = PlayerPrefs.GetInt(PlayerPrefsNames.CURRENT_LEVEL_SCORE_MULTIPLIER);
         coinsText.text = currentCoins.ToString();
@@ -85,12 +90,41 @@ public class GameManager : MonoBehaviour
     {
         while (true)
         {
-            float waitTime = Random.Range(1f, 2f);
+            float waitTime = Random.Range(3f, 5f);
             yield return new WaitForSeconds(waitTime);
             int randomIndex = Random.Range(0, obstaclesPrefabs.Count);
             GameObject selectedPrefab = obstaclesPrefabs[randomIndex];
-            GameObject newObstacle = Instantiate(selectedPrefab, spawnPoint.position, Quaternion.identity);
+            Quaternion spawnRotation = Quaternion.Euler(0f, 90f, 0f);
+            GameObject newObstacle = Instantiate(selectedPrefab, spawnPoint.position, spawnRotation);
             obstacles.Add(newObstacle);
+        }
+    }
+    
+    private IEnumerator SpawnWallGraffiti()
+    {
+        while (true)
+        {
+            float waitTime = Random.Range(4f, 6f);
+            yield return new WaitForSeconds(waitTime);
+            int randomIndex = Random.Range(0, graffitiList.Count);
+            GameObject selectedPrefab = graffitiList[randomIndex];
+            Quaternion spawnRotation = Quaternion.Euler(0f, -90f, 0f);
+            GameObject newWallGraffiti = Instantiate(selectedPrefab, wallGraffitiSpawnPoint.position, spawnRotation);
+            obstacles.Add(newWallGraffiti);
+        }
+    }
+    
+    private IEnumerator SpawnGroundGraffiti()
+    {
+        while (true)
+        {
+            float waitTime = Random.Range(10f, 17f);
+            yield return new WaitForSeconds(waitTime);
+            int randomIndex = Random.Range(0, graffitiList.Count);
+            GameObject selectedPrefab = graffitiList[randomIndex];
+            Quaternion spawnRotation = Quaternion.Euler(0f, -90f, 0f);
+            GameObject newGroundGraffiti = Instantiate(selectedPrefab, groundGraffitiSpawnPoint.position, spawnRotation);
+            obstacles.Add(newGroundGraffiti);
         }
     }
 
@@ -98,7 +132,7 @@ public class GameManager : MonoBehaviour
     {
         while (true)
         {
-            float waitTime = Random.Range(5f, 10f);
+            float waitTime = Random.Range(6f, 15f);
             yield return new WaitForSeconds(waitTime);
             
             Instantiate(coinPrefab, coinSpawnPoint.position, Quaternion.identity);

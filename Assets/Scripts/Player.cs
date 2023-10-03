@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int currentLevelJumpForce;
     [SerializeField] private PlayerUpgradeData playerUpgradeData;
     private bool canJump;
+    private bool isJumping;
 
     private void Awake()
     {
@@ -29,10 +30,15 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
            Jump();
+
         }
         
     }
 
+    public bool IsJumping() {
+        return isJumping;
+    }
+    
     private void Jump()
     {
         if (!canJump)
@@ -46,6 +52,8 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             canJump = true;
+            isJumping = false;
+            Debug.Log(isJumping);
         }
     }
 
@@ -54,6 +62,8 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             canJump = false;
+            isJumping = true;
+            Debug.Log(isJumping);
         }
     }
     

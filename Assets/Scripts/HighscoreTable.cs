@@ -98,7 +98,7 @@ public class HighscoreTable : MonoBehaviour {
         string rankString;
         switch (rank) {
         default:
-            rankString = rank + "*"; break;
+            rankString = rank + "th"; break;
 
         case 1: rankString = "1st"; break;
         case 2: rankString = "2nd"; break;

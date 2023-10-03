@@ -11,8 +11,8 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/HighscoreTable/HighscoreTable.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AudioClipRefsSO.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Graffiti.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/MusicManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerPrefsNames.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../SmashApocalypse/Assets/_Scripts/UpgradesConfig.cs" root0="SKIP_HIGHLIGHTING" />
@@ -99,7 +99,14 @@
       <workItem from="1694163418866" duration="5193000" />
       <workItem from="1694194095302" duration="4661000" />
       <workItem from="1694200640350" duration="5908000" />
-      <workItem from="1696123906571" duration="5893000" />
+      <workItem from="1696123906571" duration="6600000" />
+      <workItem from="1696210981383" duration="600000" />
+      <workItem from="1696295774678" duration="919000" />
+      <workItem from="1696296922246" duration="343000" />
+      <workItem from="1696297319788" duration="74000" />
+      <workItem from="1696297406952" duration="30000" />
+      <workItem from="1696297460792" duration="100000" />
+      <workItem from="1696297590319" duration="2107000" />
     </task>
     <servers />
   </component>

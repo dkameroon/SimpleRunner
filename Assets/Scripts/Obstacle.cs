@@ -16,7 +16,7 @@ public class Obstacle : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 moveDir = new Vector3(0, 0, -1);
+        Vector3 moveDir = new Vector3(1, 0, 0);
         transform.Translate(moveDir * speed * Time.fixedDeltaTime);
     }
 
