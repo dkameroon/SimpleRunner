@@ -14,7 +14,7 @@ public class PlayerAnimator : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         animator.SetBool(IS_JUMPING, player.IsJumping());
     }

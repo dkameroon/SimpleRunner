@@ -30,8 +30,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<GameObject> obstaclesPrefabs;
     [SerializeField] private List<Transform> wallGraffitiSpawnPoints;
     [SerializeField] private List<Transform> groundGraffitiSpawnPoints;
-    /*[SerializeField] private Transform wallGraffitiSpawnPoint;
-    [SerializeField] private Transform groundGraffitiSpawnPoint;*/
     [SerializeField] private List<GameObject> graffitiList;
     private int scoreMultiplierLevel;
     
@@ -42,6 +40,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        Application.targetFrameRate = 240;
+        QualitySettings.vSyncCount = 0;
         Instance = this;
         pauseButton.onClick.AddListener(() =>
         {
@@ -66,9 +66,24 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        ScoreRewarding();
-        GameOverTrue();
-        HighScoreSaving();
+        if (shouldCount)
+        {
+            score += Time.deltaTime * playerUpgradeData.ScoreMultiplierByLevel[scoreMultiplierLevel].Value;
+            UpdateVisualScore();
+        }
+
+        if (GameOver)
+        {
+            Time.timeScale = 0f;
+            GameOverUI.SetActive(true);
+        }
+
+        if (score > PlayerPrefs.GetFloat(PlayerPrefsNames.HIGH_SCORE, 0f))
+        {
+            PlayerPrefs.SetFloat(PlayerPrefsNames.HIGH_SCORE, score);
+            PlayerPrefs.Save();
+            IsNewHighScore = true;
+        }
     }
 
     private void ScoreRewarding()
@@ -140,7 +155,6 @@ public class GameManager : MonoBehaviour
         {
             float waitTime = Random.Range(6f, 15f);
             yield return new WaitForSeconds(waitTime);
-            
             Instantiate(coinPrefab, coinSpawnPoint.position, Quaternion.identity);
         }
     }
@@ -212,12 +226,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void IncreaseCoins(int v)
+    public void IncreaseCoins(int value)
     {
-        currentCoins += v;
+        currentCoins += value;
         coinsText.text = currentCoins.ToString();
     }
-    
+
     public int GetTotalCoins()
     {
         return currentCoins;
@@ -226,14 +240,14 @@ public class GameManager : MonoBehaviour
     public void TogglePauseGame()
     {
         isGamePaused = !isGamePaused;
+        Time.timeScale = isGamePaused ? 0f : 1f;
+
         if (isGamePaused)
         {
-            Time.timeScale = 0f;
-            OnGamePaused?.Invoke(this,EventArgs.Empty);
+            OnGamePaused?.Invoke(this, EventArgs.Empty);
         }
         else
         {
-            Time.timeScale = 1f;
             OnGameUnPaused?.Invoke(this, EventArgs.Empty);
         }
     }

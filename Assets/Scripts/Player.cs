@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerUpgradeData playerUpgradeData;
     private bool canJump;
     private bool isJumping;
+    private bool jumpRequested;
 
     private void Awake()
     {
@@ -29,7 +30,16 @@ public class Player : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-           Jump();
+            jumpRequested = true;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (jumpRequested)
+        {
+            Jump();
+            jumpRequested = false;
         }
         
     }

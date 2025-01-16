@@ -18,7 +18,7 @@ public class Coin : MonoBehaviour
     private void MovingHandler()
     {
         Vector3 moveDir = new Vector3(0, 0, -1);
-        transform.Translate(moveDir * (speed * Time.fixedDeltaTime));
+        transform.Translate(moveDir * (speed * Time.deltaTime));
     }
 
     private void OnTriggerEnter(Collider other)

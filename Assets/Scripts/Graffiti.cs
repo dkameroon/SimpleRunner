@@ -17,7 +17,7 @@ public class Graffiti : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 moveDir = new Vector3(-1, 0, 0);
-        transform.Translate(moveDir * speed * Time.fixedDeltaTime);
+        transform.Translate(moveDir * speed * Time.deltaTime);
     }
 
     private void OnBecameInvisible()

@@ -16,6 +16,8 @@ public class MainMenuUI : MonoBehaviour
     public static MainMenuUI Instance { get;private set; }
        private void Awake()
        {
+           Application.targetFrameRate = 240;
+           QualitySettings.vSyncCount = 0;
            Instance = this;
            playButton.onClick.AddListener(() =>
            {
