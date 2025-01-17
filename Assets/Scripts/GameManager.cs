@@ -194,7 +194,7 @@ public class GameManager : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(1.0f); // Adjust the frequency as needed.
+            yield return new WaitForSeconds(1.0f);
 
             GameObject player = GameObject.FindGameObjectWithTag("Player");
 
@@ -210,7 +210,6 @@ public class GameManager : MonoBehaviour
                     {
                         Vector3 obstaclePosition = obstacle.transform.position;
 
-                        // Check if the obstacle is behind the player (in the negative Z direction).
                         if (obstaclePosition.z + 3.5f < playerPosition.z)
                         {
                             obstacles.RemoveAt(i);
