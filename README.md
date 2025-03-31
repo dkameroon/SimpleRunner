@@ -55,6 +55,8 @@ SimpleRunner is an exciting endless runner where the player controls a character
 ## 🏆 Conclusion
 SimpleRunner is a well-optimized and engaging endless runner that provides a dynamic challenge for players. The procedural obstacle generation, increasing difficulty, and intuitive controls make it an exciting experience. 🚀
 
+---
+
 # 🏃 Simple Runner
 
 ## 📌 Обзор проекта
